@@ -3,10 +3,14 @@ package com.atguigu.eduservice.entity.vo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class CourseInfoVo {
+public class CourseInfoVo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @ApiModelProperty(value = "课程ID")
     private String id;
 
@@ -16,14 +20,13 @@ public class CourseInfoVo {
     @ApiModelProperty(value = "课程专业ID")
     private String subjectId;
 
-    @ApiModelProperty(value = "一级分类级ID")
+    @ApiModelProperty(value = "课程专业父级ID")
     private String subjectParentId;
 
     @ApiModelProperty(value = "课程标题")
     private String title;
 
     @ApiModelProperty(value = "课程销售价格，设置为0则可免费观看")
-    // 0.01
     private BigDecimal price;
 
     @ApiModelProperty(value = "总课时")

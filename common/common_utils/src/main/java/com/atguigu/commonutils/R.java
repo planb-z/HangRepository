@@ -6,40 +6,37 @@ import lombok.Data;
 import java.util.HashMap;
 import java.util.Map;
 
-//统一返回结果的类
 @Data
 public class R {
 
-    @ApiModelProperty(value = "是否成功")
+    @ApiModelProperty("是否成功")
     private Boolean success;
 
-    @ApiModelProperty(value = "返回码")
+    @ApiModelProperty("返回码")
     private Integer code;
 
-    @ApiModelProperty(value = "返回消息")
+    @ApiModelProperty("返回消息")
     private String message;
 
-    @ApiModelProperty(value = "返回数据")
-    private Map<String, Object> data = new HashMap<String, Object>();
+    @ApiModelProperty("返回数据")
+    private Map<String,Object> data = new HashMap<>();
 
-    //把构造方法私有
-    private R() {}
+    //只让调用静态方法  不可以直接new
+    private R(){}
 
-    //成功静态方法
-    public static R ok() {
+    public static R ok(){
         R r = new R();
         r.setSuccess(true);
         r.setCode(ResultCode.SUCCESS);
-        r.setMessage("成功");
+        r.setMessage("调用成功");
         return r;
     }
 
-    //失败静态方法
-    public static R error() {
+    public static R error(){
         R r = new R();
         r.setSuccess(false);
         r.setCode(ResultCode.ERROR);
-        r.setMessage("失败");
+        r.setMessage("调用失败");
         return r;
     }
 
@@ -67,4 +64,5 @@ public class R {
         this.setData(map);
         return this;
     }
+
 }

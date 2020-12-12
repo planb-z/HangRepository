@@ -7,9 +7,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EnableDiscoveryClient  //nacos注册
-@EnableFeignClients
 @ComponentScan(basePackages = {"com.atguigu"})
+@EnableDiscoveryClient
+@EnableFeignClients
 public class EduApplication {
 
     public static void main(String[] args) {

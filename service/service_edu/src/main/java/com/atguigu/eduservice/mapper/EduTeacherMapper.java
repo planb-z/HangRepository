@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * 讲师 Mapper 接口
  * </p>
  *
- * @author testjava
- * @since 2020-02-24
+ * @author atguigu
+ * @since 2020-11-29
  */
 public interface EduTeacherMapper extends BaseMapper<EduTeacher> {
 

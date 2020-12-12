@@ -3,32 +3,27 @@ package com.atguigu.eduservice.service;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
+import com.atguigu.servicebase.GuliException;
 import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
 
 /**
  * <p>
  * 课程 服务类
  * </p>
  *
- * @author testjava
- * @since 2020-03-02
+ * @author atguigu
+ * @since 2020-12-04
  */
 public interface EduCourseService extends IService<EduCourse> {
+    String saveCourseInfo(CourseInfoVo courseInfoVo) throws GuliException;
 
-    //添加课程基本信息的方法
-    String saveCourseInfo(CourseInfoVo courseInfoVo);
-
-    //根据课程id查询课程基本信息
     CourseInfoVo getCourseInfo(String courseId);
 
-    //修改课程信息
     void updateCourseInfo(CourseInfoVo courseInfoVo);
 
-    //根据课程id查询课程确认信息
-    CoursePublishVo publishCourseInfo(String id);
+    CoursePublishVo getCoursePublishInfo(String courseId);
 
-    //删除课程
+    Boolean pulishCourse(String id);
+
     void removeCourse(String courseId);
 }

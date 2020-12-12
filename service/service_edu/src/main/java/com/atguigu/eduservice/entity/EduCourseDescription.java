@@ -18,8 +18,8 @@ import lombok.experimental.Accessors;
  * 课程简介
  * </p>
  *
- * @author testjava
- * @since 2020-03-02
+ * @author atguigu
+ * @since 2020-12-04
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -37,11 +37,11 @@ public class EduCourseDescription implements Serializable {
     private String description;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField(fill = FieldFill.INSERT)
+    @TableField(fill =  FieldFill.INSERT)
     private Date gmtCreate;
 
     @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill =  FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
 

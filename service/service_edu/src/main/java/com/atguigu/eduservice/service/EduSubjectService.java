@@ -12,14 +12,12 @@ import java.util.List;
  * 课程科目 服务类
  * </p>
  *
- * @author testjava
- * @since 2020-02-29
+ * @author atguigu
+ * @since 2020-12-03
  */
 public interface EduSubjectService extends IService<EduSubject> {
 
-    //添加课程分类
-    void saveSubject(MultipartFile file,EduSubjectService subjectService);
+    void saveSubject(MultipartFile file,EduSubjectService eduSubjectService);
 
-    //课程分类列表（树形）
     List<OneSubject> getAllOneTwoSubject();
 }

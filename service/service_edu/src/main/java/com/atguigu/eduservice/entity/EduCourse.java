@@ -20,8 +20,8 @@ import lombok.experimental.Accessors;
  * 课程
  * </p>
  *
- * @author testjava
- * @since 2020-03-02
+ * @author atguigu
+ * @since 2020-12-04
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -38,10 +38,10 @@ public class EduCourse implements Serializable {
     @ApiModelProperty(value = "课程讲师ID")
     private String teacherId;
 
-    @ApiModelProperty(value = "二级分类ID")
+    @ApiModelProperty(value = "课程专业ID")
     private String subjectId;
 
-    @ApiModelProperty(value = "一级分类级ID")
+    @ApiModelProperty(value = "课程专业父级ID")
     private String subjectParentId;
 
     @ApiModelProperty(value = "课程标题")

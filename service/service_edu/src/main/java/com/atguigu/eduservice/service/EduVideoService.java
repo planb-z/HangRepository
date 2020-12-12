@@ -8,11 +8,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 课程视频 服务类
  * </p>
  *
- * @author testjava
- * @since 2020-03-02
+ * @author atguigu
+ * @since 2020-12-04
  */
 public interface EduVideoService extends IService<EduVideo> {
 
-    //1 根据课程id删除小节
-    void removeVideoByCourseId(String courseId);
+    void removeByCourseId(String courseId);
 }

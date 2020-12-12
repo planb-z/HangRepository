@@ -18,8 +18,8 @@ import lombok.experimental.Accessors;
  * 课程科目
  * </p>
  *
- * @author testjava
- * @since 2020-02-29
+ * @author atguigu
+ * @since 2020-12-03
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -47,7 +47,7 @@ public class EduSubject implements Serializable {
     private Date gmtCreate;
 
     @ApiModelProperty(value = "更新时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill =  FieldFill.INSERT_UPDATE)
     private Date gmtModified;
 
 

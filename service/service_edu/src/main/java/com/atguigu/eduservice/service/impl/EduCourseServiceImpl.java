@@ -1,7 +1,10 @@
 package com.atguigu.eduservice.service.impl;
 
+import com.atguigu.eduservice.client.VodClient;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduCourseDescription;
+import com.atguigu.eduservice.entity.EduVideo;
+import com.atguigu.eduservice.entity.chapter.VideoVo;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
 import com.atguigu.eduservice.mapper.EduCourseMapper;
@@ -37,6 +40,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Autowired
     private EduVideoService videoService;
+
+
+    @Autowired
+    private VodClient vodClient;
 
     @Override
     public String saveCourseInfo(CourseInfoVo courseInfoVo) throws GuliException {
@@ -90,6 +97,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Override
     public void removeCourse(String courseId) {
+
         //根据课程id删除小节
         videoService.removeByCourseId(courseId);
 

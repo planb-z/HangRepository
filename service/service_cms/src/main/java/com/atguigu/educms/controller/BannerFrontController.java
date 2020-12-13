@@ -3,6 +3,7 @@ package com.atguigu.educms.controller;
 import com.atguigu.commonutils.R;
 import com.atguigu.educms.entity.CrmBanner;
 import com.atguigu.educms.service.CrmBannerService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +22,11 @@ public class BannerFrontController {
     private CrmBannerService bannerService;
 
 
-    //查询所有幻灯片
+    @ApiOperation(value = "获取首页banner")
     @GetMapping("getAllBanner")
-    public R getAllBanner(){
-       List<CrmBanner> crmBanners =  bannerService.selectAllBanner();
-        return  R.ok().data("list",crmBanners);
+    public R index() {
+        List<CrmBanner> list = bannerService.list(null);
+        return R.ok().data("bannerList", list);
     }
 
 }

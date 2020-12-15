@@ -3,6 +3,7 @@ package com.atguigu.eduservice.mapper;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
 import com.atguigu.eduservice.entity.vo.CoursePublishVo;
+import com.atguigu.eduservice.entity.vo.CourseWebVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -15,4 +16,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
      CoursePublishVo getPublishCourseInfo(String courseId);
+
+     CourseWebVo selectInfoWebById(String courseId);
 }

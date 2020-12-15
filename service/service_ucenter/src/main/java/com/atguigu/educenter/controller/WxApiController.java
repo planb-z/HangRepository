@@ -57,11 +57,11 @@ public class WxApiController {
     public String callback(String code, String state) {
         String baseAccessTokenUrl = ConstantWxUtils.WX_OPEN_ACCESSTOKEN_URL
                 + "?appid=%s"
-                + "?secret=%s"
-                + "?code=%s"
-                + "?grant_type=authorization_code";
+                + "&secret=%s"
+                + "&code=%s"
+                + "&grant_type=authorization_code";
         String result = null;
-
+        baseAccessTokenUrl = String.format(baseAccessTokenUrl,ConstantWxUtils.WX_OPEN_APP_ID,ConstantWxUtils.WX_OPEN_APP_SECRET,code);
         try {
             result = HttpClientUtils.get(baseAccessTokenUrl);
         } catch (Exception e) {
@@ -85,11 +85,11 @@ public class WxApiController {
          */
         if (member == null) {
             System.out.println("新用户注册,openId" + openId);
-            //访问微信的资源服务器，获取用户信息
+            //访问微信的 资源服务器，获取用户信息
             String baseUserInfoUrl = ConstantWxUtils.WX_OPEN_GET_USERINFO_URL
                     + "?access_token=%s"
-                    + "?openid=%s";
-            String userInfoUrl = String.format(baseAccessTokenUrl, accessToken, openId);
+                    + "&openid=%s";
+            String userInfoUrl = String.format(baseUserInfoUrl, accessToken, openId);
             String resultUserInfo = null;
             try {
                 resultUserInfo = HttpClientUtils.get(userInfoUrl);

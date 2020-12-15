@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -51,5 +54,28 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
        }
 
        baseMapper.selectPage(pageParam,queryWrapper);
+    }
+
+    @Override
+    public Map<String, Object> pageListWeb(Page<EduTeacher> pageParam) {
+        QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+        wrapper.orderByAsc("sort");
+        baseMapper.selectPage(pageParam,wrapper);
+        List<EduTeacher> records = pageParam.getRecords();
+        long total = pageParam.getTotal();
+        boolean hasNext = pageParam.hasNext();
+        boolean hasPrevious = pageParam.hasPrevious();
+        long current = pageParam.getCurrent();
+        long size = pageParam.getSize();
+        long pages = pageParam.getPages();
+        Map<String,Object> map = new HashMap<>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+        return map;
     }
 }

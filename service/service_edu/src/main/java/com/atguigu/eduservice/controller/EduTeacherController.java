@@ -2,18 +2,22 @@ package com.atguigu.eduservice.controller;
 
 
 import com.atguigu.commonutils.R;
+import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.query.TeacherQuery;
+import com.atguigu.eduservice.service.EduCourseService;
 import com.atguigu.eduservice.service.EduTeacherService;
 import com.atguigu.servicebase.exceptionhandler.GuliException;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -30,6 +34,9 @@ public class EduTeacherController {
 
     @Autowired
     private EduTeacherService teacherService;
+
+    @Autowired
+    private EduCourseService courseService;
 
     //1 查询讲师表所有数据
     @GetMapping("findAll")
@@ -76,11 +83,19 @@ public class EduTeacherController {
         return R.ok().data("rows", pageParam.getRecords()).data("total", pageParam.getTotal());
     }
 
-    @ApiOperation("根据ID查询讲师")
-    @GetMapping("{id}")
-    public R getById(@PathVariable String id) {
+    @ApiOperation(value = "根据ID查询讲师")
+    @GetMapping(value = "{id}")
+    public R getById(
+            @ApiParam(name = "id", value = "讲师ID", required = true)
+            @PathVariable String id){
+
+        //查询讲师信息
         EduTeacher teacher = teacherService.getById(id);
-        return R.ok().data("item", teacher);
+
+        //根据讲师id查询这个讲师的课程列表
+        List<EduCourse> courseList = courseService.selectByTeacherId(id);
+
+        return R.ok().data("teacher", teacher).data("courseList", courseList);
     }
 
     @ApiOperation("修改讲师")
@@ -102,5 +117,21 @@ public class EduTeacherController {
             throw new GuliException(20001,"Guli出现自定义异常");
         }
     }
+
+    @ApiOperation(value = "分页讲师列表")
+    @GetMapping(value = "{page}/{limit}")
+    public R pageList(
+            @ApiParam(name = "page", value = "当前页码", required = true)
+            @PathVariable Long page,
+
+            @ApiParam(name = "limit", value = "每页记录数", required = true)
+            @PathVariable Long limit){
+
+        Page<EduTeacher> pageParam = new Page<>(page, limit);
+        Map<String, Object> map = teacherService.pageListWeb(pageParam);
+        return  R.ok().data(map);
+    }
+
+
 }
 

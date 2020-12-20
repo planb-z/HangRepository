@@ -7,6 +7,7 @@ import com.atguigu.educenter.entity.UcenterMember;
 import com.atguigu.educenter.entity.vo.RegisterVo;
 import com.atguigu.educenter.service.UcenterMemberService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,5 +58,21 @@ public class UcenterMemberController {
         return R.ok().data("userInfo",member);
     }
 
+
+    //根据token字符串获取用户信息
+    @PostMapping("getInfoUc/{id}")
+    public com.atguigu.commonutils.vo.UcenterMember getInfo(@PathVariable String id) {
+        //根据用户id获取用户信息
+        UcenterMember ucenterMember = memberService.getById(id);
+        com.atguigu.commonutils.vo.UcenterMember memeber = new com.atguigu.commonutils.vo.UcenterMember();
+        BeanUtils.copyProperties(ucenterMember,memeber);
+        return memeber;
+    }
+
+    @GetMapping("countregister/{day}")
+    public R registerCount(@PathVariable String day){
+        Integer count = memberService.countRegister(day);
+        return R.ok().data("countRegister",count);
+    }
 }
 

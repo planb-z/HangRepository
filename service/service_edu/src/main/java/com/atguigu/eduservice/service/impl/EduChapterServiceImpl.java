@@ -81,4 +81,5 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         wrapper.eq("course_id",courseId);
         baseMapper.delete(wrapper);
     }
+
 }

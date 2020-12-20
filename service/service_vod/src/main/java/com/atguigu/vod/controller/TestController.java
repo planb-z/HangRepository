@@ -1,6 +1,6 @@
 package com.atguigu.vod.controller;
 
-import com.atguigu.vod.Utils.Signer;
+import com.atguigu.vod.utils.Signer;
 import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

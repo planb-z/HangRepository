@@ -1,7 +1,10 @@
 package com.atguigu.eduservice.controller;
 
 
+import com.atguigu.commonutils.JwtUtils;
 import com.atguigu.commonutils.R;
+import com.atguigu.commonutils.vo.CourseInfoForm;
+import com.atguigu.eduservice.client.OrderClient;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.chapter.ChapterVo;
 import com.atguigu.eduservice.entity.vo.CourseInfoVo;
@@ -19,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +44,11 @@ public class EduCourseController {
 
     @Autowired
     private EduChapterService chapterService;
+
+
+    @Autowired
+    private OrderClient orderClient;
+
     //添加课程基本信息的方法
     @PostMapping("addCourseInfo")
     public R addCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
@@ -108,7 +117,7 @@ public class EduCourseController {
 
             @ApiParam(name = "courseQuery", value = "查询对象", required = false)
             @RequestBody(required = false) CourseQueryVo courseQuery){
-        Page<EduCourse> pageParam = new Page<EduCourse>(page, limit);
+            Page<EduCourse> pageParam = new Page<EduCourse>(page, limit);
         Map<String, Object> map = courseService.pageListWeb(pageParam, courseQuery);
         return  R.ok().data(map);
     }
@@ -119,16 +128,26 @@ public class EduCourseController {
     @GetMapping(value = "{courseId}")
     public R getById(
             @ApiParam(name = "courseId", value = "课程ID", required = true)
-            @PathVariable String courseId){
+            @PathVariable String courseId, HttpServletRequest req){
 
         //查询课程信息和讲师信息
         CourseWebVo courseWebVo = courseService.selectInfoWebById(courseId);
-
+        boolean buyCourse = orderClient.isBuyCourse(courseId, JwtUtils.getMemberIdByJwtToken(req));
         //查询当前课程的章节信息
         List<ChapterVo> chapterVoList = chapterService.getChapterVideoByCourseId(courseId);
 
-        return R.ok().data("course", courseWebVo).data("chapterVoList", chapterVoList);
+        return R.ok().data("course", courseWebVo).data("chapterVoList", chapterVoList).data("isBuy",buyCourse);
     }
+
+    //根据课程id查询课程信息
+    @GetMapping("getDto/{courseId}")
+    public com.atguigu.commonutils.vo.CourseInfoForm getCourseInfoDto(@PathVariable String courseId) {
+        CourseWebVo courseInfoForm = courseService.selectInfoWebById(courseId);
+        com.atguigu.commonutils.vo.CourseInfoForm courseInfo = new com.atguigu.commonutils.vo.CourseInfoForm();
+        BeanUtils.copyProperties(courseInfoForm,courseInfo);
+        return courseInfo;
+    }
+
 
 }
 

@@ -16,7 +16,7 @@
             WHERE ec.id=#{courseId}
     </select>
 
-    <select id="selectInfoWebById" resultType="com.guli.edu.vo.CourseWebVo">
+    <select id="selectInfoWebById" resultType="com.atguigu.eduservice.entity.vo.CourseWebVo">
           SELECT
             c.id,
             c.title,

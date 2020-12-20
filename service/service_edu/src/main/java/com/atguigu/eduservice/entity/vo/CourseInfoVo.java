@@ -11,17 +11,7 @@ public class CourseInfoVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "课程ID")
     private String id;
-
-    @ApiModelProperty(value = "课程讲师ID")
-    private String teacherId;
-
-    @ApiModelProperty(value = "课程专业ID")
-    private String subjectId;
-
-    @ApiModelProperty(value = "课程专业父级ID")
-    private String subjectParentId;
 
     @ApiModelProperty(value = "课程标题")
     private String title;
@@ -35,6 +25,36 @@ public class CourseInfoVo implements Serializable {
     @ApiModelProperty(value = "课程封面图片路径")
     private String cover;
 
+    @ApiModelProperty(value = "销售数量")
+    private Long buyCount;
+
+    @ApiModelProperty(value = "浏览数量")
+    private Long viewCount;
+
     @ApiModelProperty(value = "课程简介")
     private String description;
+
+    @ApiModelProperty(value = "讲师ID")
+    private String teacherId;
+
+    @ApiModelProperty(value = "讲师姓名")
+    private String teacherName;
+
+    @ApiModelProperty(value = "讲师资历,一句话说明讲师")
+    private String intro;
+
+    @ApiModelProperty(value = "讲师头像")
+    private String avatar;
+
+    @ApiModelProperty(value = "课程一级类别ID")
+    private String subjectLevelOneId;
+
+    @ApiModelProperty(value = "类别一级名称")
+    private String subjectLevelOne;
+
+    @ApiModelProperty(value = "课程二级类别ID")
+    private String subjectLevelTwoId;
+
+    @ApiModelProperty(value = "类别二级名称")
+    private String subjectLevelTwo;
 }

@@ -1,15 +1,15 @@
-package com.atguigu.staservice.feign;
+package com.atguigu.staservice.client;
 
 import com.atguigu.commonutils.R;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@ComponentScan
+@Component
 @FeignClient("service-ucenter")
 public interface UcenterClient {
 
-    @GetMapping("/ucenterservice/member/countregister/{day}")
-    R registerCount(@PathVariable("day") String day);
+    @GetMapping("/educenter/ucenter-member/countregister/{day}")
+    public R registerCount(@PathVariable("day") String day);
 }
